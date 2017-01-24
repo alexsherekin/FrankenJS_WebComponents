@@ -1,0 +1,33 @@
+<dom-module id="my-door">
+    <template>
+        <style>
+            :host {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+
+            .root {
+                width: 100%;
+                height: 100%;
+                background-image: url("./my-door.png");
+                background-size: 100% 100%;
+            }
+        </style>
+        <div class="root"></div>
+    </template>
+</dom-module>
+
+<script type="text/javascript">
+    class MyDoor extends Polymer.Element {
+        static get is() {
+            return 'my-door';
+        }
+
+        constructor() {
+            super();
+        }
+    }
+
+    customElements.define(MyDoor.is, MyDoor);
+</script>

@@ -1,0 +1,44 @@
+<dom-module id="my-house">
+    <template>
+        <style>
+            :host {
+                position: absolute;
+                left: 50%;
+                width: 30%;
+                height: 95%;
+                bottom: 0;
+            }
+
+            .root {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+            }
+            
+            .roof-slot {
+                flex: 1;
+                position: relative;
+                max-height: 200px;
+                width: 100%;
+            }
+        </style>
+        <div class="root">
+            <div class="roof-slot">
+                <slot name="roof"></slot>
+            </div>
+            <slot></slot>
+        </div>
+    </template>
+
+    <script type="text/javascript">
+        class MyHouse extends Polymer.Element {
+            static get is() {
+                return "my-house";
+            }
+        }
+
+        customElements.define(MyHouse.is, MyHouse);
+    </script>
+</dom-module>

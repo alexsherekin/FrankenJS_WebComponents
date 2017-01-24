@@ -1,0 +1,28 @@
+<dom-module id="my-roof">
+    <template>
+        <style>
+            :host {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+
+            .root {
+                width: 100%;
+                height: 100%;
+                background-image: url("./my-roof.png");
+                background-size: 100% 100%;
+            }
+        </style>
+        <div class="root"></div>
+    </template>
+
+    <script>
+        class MyRoof extends Polymer.Element {
+            static get is() {
+                return "my-roof";
+            }
+        }
+        customElements.define(MyRoof.is, MyRoof);
+    </script>
+</dom-module>
