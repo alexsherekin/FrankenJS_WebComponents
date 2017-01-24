@@ -1,0 +1,2 @@
+In order to use this project you will need to start some webserver on your machine, otherwise html imports will be blocked by CORS policy
+One of such tiny webservers you can download here https://sourceforge.net/projects/miniweb/
