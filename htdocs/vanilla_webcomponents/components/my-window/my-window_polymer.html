@@ -1,0 +1,77 @@
+<dom-module>
+    <template id="my-window">
+        <style>
+            :host {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+
+            .content {
+                width: 100%;
+                height: 100%;
+                background-image: url(./components/my-window/window_light_off.png);
+                background-size: 100% 100%;
+            }
+
+            .content:hover {
+                opacity: var(--hover-opacity, 0.8);
+            }
+        </style>
+        <div class="content"></div>
+    </template>
+
+    <script>
+        class MyWindow extends Polymer.Element {
+            static get is() {
+                return "my-window";
+            }
+
+            static get config() {
+                return {
+                    properties: {
+                        light: {
+                            type: Boolean,
+                            observer: "lightChanged"
+                        }
+                    }
+                };
+            }
+
+            // Element's lifecycle
+            // Restrictions - no operations with attributes and child nodes
+            constructor() {
+                super();
+            }
+
+            // Element is in DOM now. Good time for attaching event listeners, doing rendering ...
+            connectedCallback() {
+                this.shadowRoot.appendChild(template.content.cloneNode(true));
+
+                this.content = this.shadowRoot.querySelector(".content");
+                this.addEventListener("click", this.clickHandler);
+            }
+
+            // Element is not in DOM now. Clean up stuff
+            disconnectedCallback() {
+                this.removeEventListener("click", this.clickHandler);
+            }
+
+            // Element has been moved into a new document (after calling document.adoptNode(el))
+            adoptedCallback() {}
+
+            lightChanged(newValue, oldValue) {
+                this.content.style.setProperty("background-image", `url(./components/my-window/window_light_${newValue === "on" ? "on": "off"}.png)`);
+            }
+
+            clickHandler(event) {
+                if (this.light === "on") {
+                    this.light = "off";
+                } else {
+                    this.light = "on";
+                }
+            }
+        }
+        customElements.define("my-window", MyWindow);
+    </script>
+</dom-module>

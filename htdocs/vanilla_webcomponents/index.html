@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>House of my dream</title>
+    <meta charset="UTF-8">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        body {
+            background-image: url("./img/landscape.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+        
+        my-house my-floor:last-child my-window {
+            --hover-opacity: 0.1;
+        }
+    </style>
+    <link rel="import" href="./components/my-window/my-window.html">
+    <link rel="import" href="./components/my-door/my-door.html">
+    <link rel="import" href="./components/my-roof/my-roof.html">
+    <link rel="import" href="./components/my-floor/my-floor.html">
+    <link rel="import" href="./components/my-house/my-house.html">
+</head>
+
+<body>
+    <my-house>
+        <my-roof slot="roof"></my-roof>
+        <my-floor>
+            <my-window slot="windowLeft"></my-window>
+            <my-window slot="windowRight"></my-window>
+        </my-floor>
+        <my-floor>
+            <my-door slot="door"></my-door>
+            <my-window slot="windowLeft"></my-window>
+        </my-floor>
+        <my-floor>
+            <my-door slot="door"></my-door>
+            <my-window slot="windowLeft"></my-window>
+        </my-floor>
+    </my-house>
+</body>
+
+</html>

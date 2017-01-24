@@ -1,0 +1,36 @@
+<template id="my-roof-template">
+    <style>
+        :host {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .root {
+            width: 100%;
+            height: 100%;
+            background-image: url("./components/my-roof/my-roof.png");
+            background-size: 100% 100%;
+        }
+    </style>
+    <div class="root"></div>
+</template>
+
+<script type="text/javascript">
+    (function() {
+        var template = document.currentScript.ownerDocument.querySelector("#my-roof-template");
+
+        class MyRoof extends HTMLElement {
+            constructor() {
+                super();
+
+                let shadowRoot = this.attachShadow({
+                    mode: "open"
+                });
+                shadowRoot.appendChild(template.content.cloneNode(true));
+            }
+        }
+
+        customElements.define('my-roof', MyRoof);
+    })();
+</script>

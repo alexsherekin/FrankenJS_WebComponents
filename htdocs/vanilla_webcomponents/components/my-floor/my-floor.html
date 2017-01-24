@@ -1,0 +1,109 @@
+<template id="my-floor-template">
+    <style>
+        :host {
+            display: block;
+            flex: 1;
+            position: relative;
+            max-height: 200px;
+            width: 100%;
+        }
+
+        .root {
+            width: 100%;
+            height: 100%;
+            
+            background-image: url("./components/my-floor/my-floor.png");
+            background-size: 100% 100%;
+        }
+
+        .material {
+            position: relative;
+            left: 8%;
+            top: 0.4%;
+            width: 84%;
+            height: 98%;
+            
+            background-image: url("./components/my-floor/stones.jpg");
+            background-size: 100% 100%;
+        }
+
+        .window-left-slot {
+            position: absolute;
+            top: 10%;
+            left: 15%;
+            width: 20%;
+            height: 80%;
+        }
+        
+        .window-right-slot {
+            position: absolute;
+            top: 10%;
+            right: 15%;
+            width: 20%;
+            height: 80%;
+        }
+        
+        .door-slot {
+            position: absolute;
+            bottom: 0%;
+            right: 40%;
+            width: 20%;
+            height: 80%;
+        }
+    </style>
+    <div class="root">
+        <div class="material">
+            <div class="window-left-slot">
+                <slot name="windowLeft"></slot>
+            </div>
+            <div class="window-right-slot">
+                <slot name="windowRight"></slot>
+            </div>
+            <div class="door-slot">
+                <slot name="door"></slot>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script type="text/javascript">
+    (function() {
+        var template = document.currentScript.ownerDocument.querySelector("#my-floor-template");
+
+        class MyFloor extends HTMLElement {
+            static get observedAttributes() {
+                return ["material"];
+            }
+            attributeChangedCallback(attr, oldValue, newValue) {
+                if (attr == "material") {
+                    if (newValue) {
+                        this.materialLayer.style.setProperty("background-image", `url(./components/my-floor/${newValue}.jpg)`);
+                    } else {
+                        this.materialLayer.style.setProperty("background-image", "");
+                    }
+                }
+            }
+            constructor() {
+                super();
+
+                this.attachShadow({
+                    mode: "open"
+                });
+                this.shadowRoot.appendChild(template.content.cloneNode(true));
+            }
+
+            get material() {
+                return this.getAttribute("material") !== null;
+            }
+            set material(value) {
+                this.setAttribute("material", value);
+            }
+
+            connectedCallback() {
+                this.materialLayer = this.shadowRoot.querySelector(".material");
+            }
+        }
+
+        customElements.define('my-floor', MyFloor);
+    })();
+</script>
